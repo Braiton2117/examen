@@ -24,10 +24,11 @@ export const getPronosticoxId = async (req, res) => {
 };
 
 export const postPronostico = async (req, res) => {
-    const { id_usr, id_par, id_res, valor } = req.body;  // Recuperamos los valores del cuerpo de la solicitud
+  const { id_usr, id_par, id_res, valor } = req.body;  // Recuperamos los valores del cuerpo de la solicitud
   
-  // Obtener la fecha y hora de registro actual
-  const fecha_registro = new Date().toISOString();
+  // Obtener la fecha de registro actual y formatearla correctamente (sin la hora)
+  const fecha_registro = new Date().toISOString().slice(0, 10) + "T00:00:00.000Z"; // Fecha en formato YYYY-MM-DDT00:00:00.000Z
+
   try {
     const result = await conmysql.query(`
       INSERT INTO pronostico (id_usr, id_par, id_res, valor, fecha_registro)

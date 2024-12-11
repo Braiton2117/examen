@@ -25,9 +25,9 @@ export const getPronosticoxId = async (req, res) => {
 
 export const postPronostico = async (req, res) => {
   const { id_usr, id_par, id_res, valor } = req.body;  // Recuperamos los valores del cuerpo de la solicitud
-  
-  // Obtener la fecha de registro actual y formatearla correctamente (sin la hora)
-  const fecha_registro = new Date().toISOString().slice(0, 10) + "T00:00:00.000Z"; // Fecha en formato YYYY-MM-DDT00:00:00.000Z
+
+  // Obtener la fecha de registro actual en el formato YYYY-MM-DD HH:mm:ss
+  const fecha_registro = new Date().toISOString().slice(0, 19).replace("T", " ");  // Esto da el formato YYYY-MM-DD HH:mm:ss
 
   try {
     const result = await conmysql.query(`
